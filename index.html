@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hidden Object</title>
+  </head>
+  <body>
+    <div
+      id="content"
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <p id="number" style="border-bottom: 4px solid black; font-size: 35px">
+        Jogo dos Objetos Escondidos
+      </p>
+      <div id="scene" style="position: relative; display: inline-block">
+        <img src="resources/objects.jpeg" alt="Objects" usemap="#doodle" />
+      </div>
+      <map name="doodle">
+        <area
+          id="s1"
+          shape="rect"
+          coords="234,484,255,498"
+          alt="bala"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s2"
+          shape="rect"
+          coords="256,336,276,355"
+          alt="flor"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s3"
+          shape="rect"
+          coords="725,104,743,122"
+          alt="pao"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s4"
+          shape="rect"
+          coords="785,178,811,207"
+          alt="notaMusical"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s5"
+          shape="rect"
+          coords="682,465,717,499"
+          alt="ferradura"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s6"
+          shape="rect"
+          coords="812,567,834,590"
+          alt="boomerang"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s7"
+          shape="rect"
+          coords="992,490,1014,506"
+          alt="milho"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s8"
+          shape="rect"
+          coords="1025,348,1045,356"
+          alt="chave"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s9"
+          shape="rect"
+          coords="608,316,620,331"
+          alt="martelo"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+        <area
+          id="s10"
+          shape="rect"
+          coords="1234,377,1250,395"
+          alt="alho"
+          onclick="find(this)"
+          onmouseover="mouse(this)"
+        />
+      </map>
+    </div>
+
+    <script>
+      let counter = 0;
+      function mouse(x) {
+        document.getElementById(x.id).style.cursor = "pointer";
+      }
+
+      function find(x) {
+        const main = document.getElementById("scene");
+
+        //To extract all numbers from a string
+        let pos = x.coords.match(/\d+/g).map(Number);
+        if (counter < 10) {
+          const found = document.createElement("div");
+          found.style.position = "absolute";
+          found.style.borderRadius = "50%";
+          found.style.border = "5px solid red";
+          found.style.width = "40px";
+          found.style.height = "40px";
+          found.style.top = pos[1] - 10 + "px";
+          found.style.left = pos[0] - 10 + "px";
+          main.appendChild(found);
+          counter++;
+        }
+
+        if (counter === 10) {
+          const msg = document.createElement("p");
+          msg.innerHTML = "Voce Venceu!";
+          msg.style.fontSize = "150px";
+          msg.style.fontWeight = "bolder";
+          msg.style.color = "white";
+          msg.style.position = "absolute";
+          msg.style.top = "50%";
+          msg.style.left = "50%";
+          msg.style.transform = "translate(-50%, -50%)";
+          msg.style.whiteSpace = "nowrap";
+          main.appendChild(msg);
+        }
+      }
+    </script>
+  </body>
+</html>
